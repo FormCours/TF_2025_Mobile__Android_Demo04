@@ -24,4 +24,9 @@
         android:textAlignment="center"
         android:text="@string/placeholder_no_data" />
 
+    <ImageView
+        android:id="@+id/iv_example_request_image"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"  />
+
 </LinearLayout>

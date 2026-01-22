@@ -44,6 +44,7 @@ dependencies {
     implementation(libs.androidx.constraintlayout)
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.10.0")
     implementation("com.google.code.gson:gson:2.13.2")
+    implementation("com.github.bumptech.glide:glide:5.0.5")
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

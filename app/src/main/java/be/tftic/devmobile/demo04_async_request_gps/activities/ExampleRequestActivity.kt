@@ -12,6 +12,7 @@ import androidx.lifecycle.lifecycleScope
 import be.tftic.devmobile.demo04_async_request_gps.R
 import be.tftic.devmobile.demo04_async_request_gps.databinding.ActivityExampleRequestBinding
 import be.tftic.devmobile.demo04_async_request_gps.services.getPersonInfo
+import com.bumptech.glide.Glide
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -46,13 +47,21 @@ class ExampleRequestActivity : AppCompatActivity() {
     private fun loadUser() {
         lifecycleScope.launch {
             withContext(Dispatchers.Main) {
-                binding.tvExampleRequestResult.text = "🧟‍♀️ Chargement 🧟‍♂️"
+                binding.tvExampleRequestResult.text = getString(R.string.txt_loading)
+
+                Glide.with(this@ExampleRequestActivity)
+                    .clear(binding.ivExampleRequestImage)
             }
 
             val person = getPersonInfo();
 
             withContext(Dispatchers.Main) {
-                binding.tvExampleRequestResult.text = "Bonjour ${person.firstname} ${person.lastname}"
+                binding.tvExampleRequestResult.text =
+                    getString(R.string.text_welcome, person.firstname, person.lastname)
+
+                Glide.with(this@ExampleRequestActivity)
+                    .load(person.image)
+                    .into(binding.ivExampleRequestImage)
             }
         }
     }
