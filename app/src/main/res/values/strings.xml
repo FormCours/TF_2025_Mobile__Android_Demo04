@@ -3,4 +3,6 @@
     <string name="btn_menu_async">Demo Async</string>
     <string name="btn_menu_request">Demo Requete</string>
     <string name="btn_menu_gps">Demo GPS</string>
+    <string name="btn_get_user">Get user</string>
+    <string name="placeholder_no_data">Aucune donnée...</string>
 </resources>
