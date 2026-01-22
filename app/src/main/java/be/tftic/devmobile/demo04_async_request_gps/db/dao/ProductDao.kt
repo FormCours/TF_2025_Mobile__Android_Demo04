@@ -8,6 +8,8 @@ import androidx.core.database.getStringOrNull
 import be.tftic.devmobile.demo04_async_request_gps.db.DbContract
 import be.tftic.devmobile.demo04_async_request_gps.db.DbHelper
 import be.tftic.devmobile.demo04_async_request_gps.models.Product
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import java.time.LocalDate
 
 class ProductDao(context: Context) {
@@ -63,7 +65,7 @@ class ProductDao(context: Context) {
     //endregion
 
     //region Méthode d'interaction avec les données (get, insert, delete, update)
-    fun getAll() : List<Product> {
+    suspend fun getAll() : List<Product> = withContext(Dispatchers.IO) {
         val db = requireDb();
 
         // Requete pour un récuperer les données
@@ -79,7 +81,7 @@ class ProductDao(context: Context) {
 
         // Si aucun resultat dans le cursor, envoi d'une liste vide
         if(!cursor.moveToFirst()) {
-            return emptyList()
+            return@withContext emptyList()
         }
 
         // Parcours du cursor
@@ -96,10 +98,10 @@ class ProductDao(context: Context) {
 
         // Cloture de la requete
         cursor.close()
-        return result
+        return@withContext result
     }
 
-    fun getById(productId: Long) : Product? {
+    suspend fun getById(productId: Long) : Product? = withContext(Dispatchers.IO) {
         val db = requireDb()
 
         // Utilisation du cursor via l'ecriture "use" de kotlin
@@ -114,23 +116,23 @@ class ProductDao(context: Context) {
         ).use { cursor ->
 
             if(!cursor.moveToFirst()) {
-                return null
+                return@withContext null
             }
-            return cursorToProduct(cursor)
+            return@withContext cursorToProduct(cursor)
         }
     }
 
-    fun insert(product: Product) : Long {
+    suspend fun insert(product: Product) : Long = withContext(Dispatchers.IO) {
         val db = requireDb()
 
-        return db.insertOrThrow(
+        return@withContext db.insertOrThrow(
             DbContract.Product.TABLE_NAME,
             null,
             productToContentValues(product)
         )
     }
 
-    fun delete(productId: Long) : Boolean {
+    suspend fun delete(productId: Long) : Boolean = withContext(Dispatchers.IO) {
         val db = requireDb()
 
         val nbRowDeleted = db.delete(
@@ -139,10 +141,10 @@ class ProductDao(context: Context) {
             arrayOf(productId.toString())
         )
 
-        return nbRowDeleted == 1
+        return@withContext nbRowDeleted == 1
     }
 
-    fun update(product: Product) : Boolean {
+    suspend fun update(product: Product) : Boolean= withContext(Dispatchers.IO)  {
         val db = requireDb()
 
         val nbRowUpdated = db.update(
@@ -152,7 +154,7 @@ class ProductDao(context: Context) {
             arrayOf(product.id.toString())
         )
 
-        return nbRowUpdated == 1
+        return@withContext nbRowUpdated == 1
     }
     //endregion
 }
