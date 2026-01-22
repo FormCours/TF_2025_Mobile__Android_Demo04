@@ -9,7 +9,6 @@
     android:showDividers="middle"
     android:divider="@android:color/transparent"
     android:dividerPadding="@dimen/spacing"
-    android:padding="@dimen/spacing"
     tools:context=".MainActivity">
 
     <Button
