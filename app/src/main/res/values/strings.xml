@@ -7,4 +7,5 @@
     <string name="placeholder_no_data">Aucune donnée...</string>
     <string name="txt_loading">🧟‍♀️ Chargement 🧟‍♂️</string>
     <string name="text_welcome">Bonjour %1$s %2$s</string>
+    <string name="btn_get_position_now">File ta position !</string>
 </resources>

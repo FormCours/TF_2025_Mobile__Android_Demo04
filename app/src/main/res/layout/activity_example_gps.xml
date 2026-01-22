@@ -9,4 +9,17 @@
     android:orientation="vertical"
     tools:context=".activities.ExampleGpsActivity">
 
+    <Button
+        android:id="@+id/btn_example_gps_current"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_get_position_now"
+        android:textSize="50sp" />
+
+    <TextView
+        android:id="@+id/tv_example_gps_result"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"/>
+
 </LinearLayout>
